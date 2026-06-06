@@ -1,0 +1,1214 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lesões Meniscais Pediátricas | Dra. Danniele Cruz</title>
+<style>
+  /* ============================================================
+     FONTS
+  ============================================================ */
+  @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Nunito:wght@400;600;700;800;900&family=IBM+Plex+Mono:wght@400;600&family=Dancing+Script:wght@700&display=swap');
+
+  /* ============================================================
+     CUSTOM PROPERTIES
+  ============================================================ */
+  :root {
+    --gold:        #C9A84C;
+    --gold-light:  #F0D080;
+    --gold-dim:    #7A5C1E;
+    --red:         #B22222;
+    --red-bright:  #E63030;
+    --red-dim:     #5C1010;
+    --green:       #1A7A4A;
+    --green-bright:#22C870;
+    --teal:        #1AB8A0;
+    --bg-deep:     #07090F;
+    --bg-card:     #0D1120;
+    --bg-card2:    #111828;
+    --border-gold: rgba(201,168,76,0.45);
+    --border-red:  rgba(178,34,34,0.5);
+    --border-teal: rgba(26,184,160,0.45);
+    --text-white:  #F2F4F8;
+    --text-muted:  #8A94A8;
+    --font-display:'Bebas Neue', 'Trebuchet MS', sans-serif;
+    --font-body:   'Nunito', 'Trebuchet MS', Arial, sans-serif;
+    --font-mono:   'IBM Plex Mono', monospace;
+    --font-sig:    'Dancing Script', cursive;
+  }
+
+  /* ============================================================
+     RESET & BASE
+  ============================================================ */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background-color: var(--bg-deep);
+    color: var(--text-white);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.6;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ============================================================
+     BACKGROUND GRAIN TEXTURE
+  ============================================================ */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    background-size: 200px 200px;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.35;
+  }
+
+  /* Cinematic vignette */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.7) 100%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ============================================================
+     LAYOUT WRAPPER
+  ============================================================ */
+  .wrapper {
+    position: relative;
+    z-index: 1;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.25rem 3rem;
+  }
+
+  /* ============================================================
+     HEADER / HERO
+  ============================================================ */
+  .hero {
+    position: relative;
+    text-align: center;
+    padding: 3.5rem 1rem 2.5rem;
+    overflow: hidden;
+  }
+
+  /* Glow behind hero */
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 700px;
+    height: 300px;
+    background: radial-gradient(ellipse, rgba(201,168,76,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-kicker {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.22em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+    opacity: 0.85;
+  }
+
+  .hero-title {
+    font-family: var(--font-display);
+    font-size: clamp(2.8rem, 8vw, 6.5rem);
+    line-height: 0.95;
+    letter-spacing: 0.04em;
+    background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold) 45%, #8B6010 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+    filter: drop-shadow(0 0 30px rgba(201,168,76,0.25));
+  }
+
+  .hero-sub {
+    font-family: var(--font-display);
+    font-size: clamp(1rem, 3vw, 1.9rem);
+    letter-spacing: 0.12em;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    margin-bottom: 1.6rem;
+  }
+
+  /* Impact phrase */
+  .hero-quote {
+    display: inline-block;
+    font-family: var(--font-body);
+    font-size: clamp(0.9rem, 2.2vw, 1.15rem);
+    font-weight: 700;
+    font-style: italic;
+    color: var(--text-white);
+    background: linear-gradient(135deg, rgba(178,34,34,0.25), rgba(201,168,76,0.12));
+    border: 1px solid var(--border-gold);
+    border-left: 4px solid var(--gold);
+    border-radius: 0 10px 10px 0;
+    padding: 0.9rem 1.4rem;
+    max-width: 700px;
+    text-shadow: 0 1px 8px rgba(0,0,0,0.8);
+    box-shadow: 0 4px 30px rgba(201,168,76,0.12), inset 0 1px 0 rgba(255,255,255,0.04);
+  }
+
+  /* Horizontal divider */
+  .divider {
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--gold-dim), var(--gold), var(--gold-dim), transparent);
+    margin: 2rem 0;
+    opacity: 0.6;
+  }
+
+  /* ============================================================
+     MENISCO SVG HERO ILLUSTRATION
+  ============================================================ */
+  .menisco-hero {
+    display: flex;
+    justify-content: center;
+    margin: 1rem 0 0.5rem;
+  }
+
+  /* ============================================================
+     GRID LAYOUT
+  ============================================================ */
+  .grid-main {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .grid-3 {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1.25rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .col-span-2 { grid-column: span 2; }
+  .col-span-3 { grid-column: span 3; }
+
+  /* ============================================================
+     CARDS
+  ============================================================ */
+  .card {
+    background: var(--bg-card);
+    border-radius: 14px;
+    padding: 1.5rem 1.6rem;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.06);
+    box-shadow:
+      0 2px 40px rgba(0,0,0,0.5),
+      inset 0 1px 0 rgba(255,255,255,0.04);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+
+  .card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 50px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.06);
+  }
+
+  /* Card variants */
+  .card-gold {
+    border-color: var(--border-gold);
+    background: linear-gradient(145deg, #0D1120 0%, #111520 100%);
+  }
+  .card-gold::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(to right, transparent, var(--gold), transparent);
+    border-radius: 14px 14px 0 0;
+  }
+
+  .card-red {
+    border-color: var(--border-red);
+    background: linear-gradient(145deg, #110a0a 0%, #160e0e 100%);
+  }
+  .card-red::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(to right, transparent, var(--red-bright), transparent);
+    border-radius: 14px 14px 0 0;
+  }
+
+  .card-teal {
+    border-color: var(--border-teal);
+    background: linear-gradient(145deg, #080f12 0%, #0c1518 100%);
+  }
+  .card-teal::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(to right, transparent, var(--teal), transparent);
+    border-radius: 14px 14px 0 0;
+  }
+
+  .card-green {
+    border-color: rgba(34,200,112,0.35);
+    background: linear-gradient(145deg, #070f0a 0%, #0b1510 100%);
+  }
+  .card-green::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(to right, transparent, var(--green-bright), transparent);
+    border-radius: 14px 14px 0 0;
+  }
+
+  /* Card number badge */
+  .card-num {
+    position: absolute;
+    top: 1.1rem;
+    right: 1.1rem;
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    color: var(--gold);
+    background: rgba(201,168,76,0.1);
+    border: 1px solid rgba(201,168,76,0.25);
+    border-radius: 4px;
+    padding: 0.15rem 0.45rem;
+  }
+
+  /* Card title */
+  .card-title {
+    font-family: var(--font-display);
+    font-size: clamp(1.1rem, 2.5vw, 1.55rem);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+  }
+
+  .ct-gold { color: var(--gold-light); }
+  .ct-red  { color: #FF6B6B; }
+  .ct-teal { color: var(--teal); }
+  .ct-green{ color: var(--green-bright); }
+
+  .card-body {
+    font-size: 0.9rem;
+    color: #C8D0E0;
+    line-height: 1.65;
+  }
+
+  /* ============================================================
+     STAT PILLS / BADGES
+  ============================================================ */
+  .stat-row {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    margin: 0.9rem 0;
+  }
+
+  .stat-pill {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    font-weight: 600;
+    padding: 0.4rem 0.9rem;
+    border-radius: 100px;
+    letter-spacing: 0.05em;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+  }
+
+  .sp-gold {
+    background: rgba(201,168,76,0.14);
+    border: 1px solid rgba(201,168,76,0.4);
+    color: var(--gold-light);
+  }
+  .sp-red {
+    background: rgba(178,34,34,0.16);
+    border: 1px solid rgba(200,50,50,0.45);
+    color: #FF8080;
+  }
+  .sp-teal {
+    background: rgba(26,184,160,0.14);
+    border: 1px solid rgba(26,184,160,0.4);
+    color: var(--teal);
+  }
+  .sp-green {
+    background: rgba(26,160,80,0.14);
+    border: 1px solid rgba(34,200,112,0.4);
+    color: var(--green-bright);
+  }
+
+  /* ============================================================
+     BULLET LIST
+  ============================================================ */
+  .bullet-list {
+    list-style: none;
+    padding: 0;
+    margin: 0.6rem 0;
+  }
+
+  .bullet-list li {
+    padding: 0.4rem 0 0.4rem 1.5rem;
+    position: relative;
+    font-size: 0.88rem;
+    color: #C8D0E0;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+  }
+
+  .bullet-list li:last-child { border-bottom: none; }
+
+  .bullet-list li::before {
+    content: '▸';
+    position: absolute;
+    left: 0;
+    color: var(--gold);
+    font-size: 0.75rem;
+    top: 0.45rem;
+  }
+
+  .bullet-list.red li::before { color: var(--red-bright); content: '✕'; font-size: 0.65rem; top: 0.55rem; }
+  .bullet-list.teal li::before { color: var(--teal); content: '◈'; }
+  .bullet-list.green li::before { color: var(--green-bright); content: '✓'; }
+
+  /* ============================================================
+     PEGADINHA CALLOUT
+  ============================================================ */
+  .pegadinha {
+    background: linear-gradient(135deg, rgba(201,168,76,0.08), rgba(201,168,76,0.03));
+    border: 1px solid rgba(201,168,76,0.3);
+    border-left: 4px solid var(--gold);
+    border-radius: 0 10px 10px 0;
+    padding: 0.75rem 1rem;
+    margin: 0.75rem 0;
+    font-size: 0.83rem;
+    color: var(--gold-light);
+    font-weight: 700;
+    position: relative;
+  }
+
+  .pegadinha::before {
+    content: '⚠ PEGADINHA DE PROVA';
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    color: var(--gold);
+    margin-bottom: 0.3rem;
+    opacity: 0.8;
+  }
+
+  .pegadinha.red-trap {
+    background: linear-gradient(135deg, rgba(178,34,34,0.1), rgba(178,34,34,0.03));
+    border-color: rgba(200,50,50,0.4);
+    border-left-color: var(--red-bright);
+    color: #FFAAAA;
+  }
+
+  .pegadinha.red-trap::before {
+    content: '⚠ ARMADILHA CLÍNICA';
+    color: var(--red-bright);
+  }
+
+  /* ============================================================
+     MNEMONIC BOX
+  ============================================================ */
+  .mnemonic-box {
+    background: linear-gradient(135deg, rgba(26,184,160,0.1), rgba(26,184,160,0.03));
+    border: 1px solid rgba(26,184,160,0.35);
+    border-radius: 10px;
+    padding: 1rem 1.2rem;
+    text-align: center;
+    margin: 0.8rem 0;
+  }
+
+  .mnemonic-box .mnem-label {
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.18em;
+    color: var(--teal);
+    text-transform: uppercase;
+    margin-bottom: 0.4rem;
+    opacity: 0.8;
+  }
+
+  .mnemonic-box .mnem-text {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    font-weight: 800;
+    color: #E0F8F4;
+    font-style: italic;
+  }
+
+  /* ============================================================
+     ALGORITHM / FLOW ARROW
+  ============================================================ */
+  .algo-chain {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0;
+    margin: 1rem 0;
+  }
+
+  .algo-step {
+    background: rgba(201,168,76,0.1);
+    border: 1px solid rgba(201,168,76,0.3);
+    border-radius: 8px;
+    padding: 0.5rem 0.85rem;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--gold-light);
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-align: center;
+    flex: 1;
+    min-width: 90px;
+  }
+
+  .algo-arrow {
+    color: var(--gold-dim);
+    font-size: 1.1rem;
+    padding: 0 0.15rem;
+    flex-shrink: 0;
+  }
+
+  .algo-step.green-step {
+    background: rgba(34,200,112,0.1);
+    border-color: rgba(34,200,112,0.3);
+    color: var(--green-bright);
+  }
+
+  .algo-step.red-step {
+    background: rgba(178,34,34,0.1);
+    border-color: rgba(200,50,50,0.3);
+    color: #FF8080;
+    text-decoration: line-through;
+    opacity: 0.8;
+  }
+
+  /* ============================================================
+     VASCULAR PERCENTAGE VISUAL
+  ============================================================ */
+  .vascular-bar {
+    margin: 1rem 0;
+  }
+
+  .vascular-label {
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    margin-bottom: 0.4rem;
+  }
+
+  .bar-track {
+    height: 14px;
+    background: rgba(255,255,255,0.06);
+    border-radius: 100px;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.07);
+  }
+
+  .bar-fill {
+    height: 100%;
+    border-radius: 100px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .bar-fill.full {
+    background: linear-gradient(to right, #B22222, #E63030, #FF6B6B);
+    width: 100%;
+    box-shadow: 0 0 12px rgba(230,48,48,0.5);
+  }
+
+  .bar-fill.high {
+    background: linear-gradient(to right, #1A7A4A, #22C870);
+    width: 90%;
+    box-shadow: 0 0 12px rgba(34,200,112,0.4);
+  }
+
+  /* Shimmer on bars */
+  .bar-fill::after {
+    content: '';
+    position: absolute;
+    top: 0; left: -100%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(to right, transparent, rgba(255,255,255,0.3), transparent);
+    animation: shimmer 2.5s infinite;
+  }
+
+  @keyframes shimmer {
+    to { left: 200%; }
+  }
+
+  /* ============================================================
+     IMAGING CARDS (RNM / RX)
+  ============================================================ */
+  .img-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.9rem;
+    margin-top: 0.8rem;
+  }
+
+  .img-card {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 10px;
+    padding: 0.9rem;
+    text-align: center;
+  }
+
+  .img-card.choice {
+    border-color: rgba(26,184,160,0.4);
+    background: rgba(26,184,160,0.05);
+  }
+
+  .img-card-title {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    font-weight: 600;
+    margin-top: 0.5rem;
+    color: var(--teal);
+  }
+
+  .img-card.rx-card .img-card-title { color: var(--text-muted); }
+
+  .img-card-desc {
+    font-size: 0.77rem;
+    color: #9AA4B8;
+    margin-top: 0.25rem;
+    line-height: 1.4;
+  }
+
+  /* ============================================================
+     GOLDEN RULE STRIP
+  ============================================================ */
+  .golden-rule {
+    background: linear-gradient(135deg, rgba(201,168,76,0.12) 0%, rgba(178,34,34,0.06) 100%);
+    border: 1px solid rgba(201,168,76,0.35);
+    border-radius: 14px;
+    padding: 1.6rem 2rem;
+    margin: 1.5rem 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .golden-rule::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(to right, var(--red-bright), var(--gold), var(--gold-light), var(--gold), var(--red-bright));
+  }
+
+  .gr-title {
+    font-family: var(--font-display);
+    font-size: clamp(1.1rem, 2.5vw, 1.6rem);
+    letter-spacing: 0.1em;
+    color: var(--gold-light);
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  /* ============================================================
+     QUICK SUMMARY STRIP
+  ============================================================ */
+  .summary-strip {
+    background: linear-gradient(135deg, #080a12 0%, #0c0f1a 100%);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-top: 3px solid var(--gold);
+    border-radius: 14px;
+    padding: 1.6rem 2rem;
+    margin: 1.5rem 0;
+  }
+
+  .summary-title {
+    font-family: var(--font-display);
+    font-size: clamp(1.1rem, 2.5vw, 1.45rem);
+    letter-spacing: 0.1em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+
+  .summary-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.75rem;
+  }
+
+  .summary-item {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 8px;
+    padding: 0.7rem 0.9rem;
+    text-align: center;
+  }
+
+  .si-value {
+    font-family: var(--font-mono);
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--gold-light);
+    display: block;
+  }
+
+  .si-label {
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    margin-top: 0.2rem;
+    line-height: 1.3;
+  }
+
+  /* ============================================================
+     FOOTER
+  ============================================================ */
+  .footer {
+    text-align: center;
+    padding: 2rem 1rem 1.5rem;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    margin-top: 2rem;
+  }
+
+  .footer-phrase {
+    font-family: var(--font-body);
+    font-size: clamp(0.85rem, 2vw, 1rem);
+    font-weight: 700;
+    font-style: italic;
+    color: var(--gold);
+    margin-bottom: 1rem;
+  }
+
+  .footer-sig {
+    font-family: var(--font-sig);
+    font-size: clamp(1.3rem, 3vw, 1.8rem);
+    color: var(--gold-light);
+    filter: drop-shadow(0 0 12px rgba(201,168,76,0.3));
+  }
+
+  .footer-role {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.18em;
+    color: var(--text-muted);
+    margin-top: 0.25rem;
+    text-transform: uppercase;
+  }
+
+  /* ============================================================
+     RESPONSIVE
+  ============================================================ */
+  @media (max-width: 768px) {
+    .grid-main  { grid-template-columns: 1fr; }
+    .grid-3     { grid-template-columns: 1fr; }
+    .col-span-2 { grid-column: span 1; }
+    .col-span-3 { grid-column: span 1; }
+    .summary-grid { grid-template-columns: repeat(2, 1fr); }
+    .img-cards  { grid-template-columns: 1fr; }
+    .algo-chain { flex-direction: column; align-items: stretch; }
+    .algo-arrow { transform: rotate(90deg); text-align: center; }
+    .golden-rule { padding: 1.2rem 1rem; }
+    .card { padding: 1.2rem 1.1rem; }
+  }
+
+  /* ============================================================
+     UTILITY
+  ============================================================ */
+  .text-center { text-align: center; }
+  .mt-sm { margin-top: 0.5rem; }
+  .mt-md { margin-top: 0.9rem; }
+  .strong { font-weight: 800; color: var(--text-white); }
+  .highlight-gold { color: var(--gold-light); font-weight: 700; }
+  .highlight-red  { color: #FF8080; font-weight: 700; }
+  .highlight-teal { color: var(--teal); font-weight: 700; }
+  .highlight-green{ color: var(--green-bright); font-weight: 700; }
+</style>
+</head>
+<body>
+
+<div class="wrapper">
+
+  <!-- ============================================================
+       HERO
+  ============================================================ -->
+  <header class="hero">
+    <p class="hero-kicker">ORTOPEDIA PEDIÁTRICA · TEOT · REVISÃO CIRÚRGICA</p>
+    <h1 class="hero-title">Lesões Meniscais<br>Pediátricas</h1>
+    <p class="hero-sub">Preservar é a única opção aceitável</p>
+
+    <!-- SVG: Menisco + vasos sanguíneos -->
+    <div class="menisco-hero">
+      <svg width="320" height="120" viewBox="0 0 320 120" xmlns="http://www.w3.org/2000/svg" aria-label="Menisco vascularizado">
+        <!-- Fundo glow -->
+        <defs>
+          <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#C9A84C" stop-opacity="0.18"/>
+            <stop offset="100%" stop-color="#C9A84C" stop-opacity="0"/>
+          </radialGradient>
+          <radialGradient id="vasGlow" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#B22222" stop-opacity="0.22"/>
+            <stop offset="100%" stop-color="#B22222" stop-opacity="0"/>
+          </radialGradient>
+          <filter id="blur4">
+            <feGaussianBlur stdDeviation="4"/>
+          </filter>
+        </defs>
+
+        <!-- Glow ellipse -->
+        <ellipse cx="160" cy="60" rx="130" ry="45" fill="url(#glow)" filter="url(#blur4)"/>
+
+        <!-- Menisco em meia-lua - zona periférica vascular (vermelho) -->
+        <path d="M 55 75 Q 80 25 160 20 Q 240 25 265 75 Q 240 95 160 100 Q 80 95 55 75 Z"
+              fill="none" stroke="#C9A84C" stroke-width="1.5" opacity="0.3"/>
+
+        <!-- Corpo meniscal -->
+        <path d="M 65 72 Q 90 32 160 28 Q 230 32 255 72 Q 230 90 160 95 Q 90 90 65 72 Z"
+              fill="rgba(201,168,76,0.08)" stroke="#C9A84C" stroke-width="2" opacity="0.7"/>
+
+        <!-- Zona periférica VASCULAR (vermelho) -->
+        <path d="M 65 72 Q 90 32 130 29 L 130 48 Q 100 50 80 72 Z"
+              fill="rgba(178,34,34,0.25)" stroke="none"/>
+        <path d="M 190 29 Q 230 32 255 72 L 240 72 Q 220 50 190 48 Z"
+              fill="rgba(178,34,34,0.25)" stroke="none"/>
+
+        <!-- Label zona vascular -->
+        <text x="88" y="70" font-family="monospace" font-size="7" fill="#FF8080" opacity="0.9">VASCULAR</text>
+
+        <!-- Vasos sanguíneos -->
+        <!-- Vaso 1 -->
+        <path d="M 75 72 Q 78 60 82 50" stroke="#B22222" stroke-width="1.5" fill="none" opacity="0.8"/>
+        <path d="M 82 50 Q 86 42 90 38" stroke="#E63030" stroke-width="1.2" fill="none" opacity="0.7"/>
+        <!-- Vaso 2 -->
+        <path d="M 245 72 Q 242 60 238 50" stroke="#B22222" stroke-width="1.5" fill="none" opacity="0.8"/>
+        <path d="M 238 50 Q 234 42 230 38" stroke="#E63030" stroke-width="1.2" fill="none" opacity="0.7"/>
+        <!-- Pequenos capilares -->
+        <path d="M 80 55 Q 83 52 86 53" stroke="#FF6B6B" stroke-width="0.9" fill="none" opacity="0.6"/>
+        <path d="M 240 55 Q 237 52 234 53" stroke="#FF6B6B" stroke-width="0.9" fill="none" opacity="0.6"/>
+
+        <!-- Ponto de lesão longitudinal periférica -->
+        <ellipse cx="112" cy="42" rx="10" ry="4" fill="rgba(255,107,107,0.3)" stroke="#FF6B6B" stroke-width="1.2"/>
+        <line x1="112" y1="38" x2="112" y2="46" stroke="#FF6B6B" stroke-width="1.5" stroke-dasharray="2,1"/>
+        <text x="118" y="40" font-family="monospace" font-size="6.5" fill="#FFAAAA" opacity="0.9">LESÃO</text>
+        <text x="114" y="48" font-family="monospace" font-size="6.5" fill="#FFAAAA" opacity="0.9">LONG.</text>
+
+        <!-- Label zona avascular -->
+        <text x="145" y="72" font-family="monospace" font-size="7" fill="#8A94A8" opacity="0.7">AVASCULAR</text>
+
+        <!-- Seta sutura -->
+        <line x1="100" y1="110" x2="112" y2="50" stroke="#22C870" stroke-width="1.3" stroke-dasharray="3,2" marker-end="url(#arrowGreen)" opacity="0.7"/>
+        <text x="60" y="114" font-family="monospace" font-size="7.5" fill="#22C870" font-weight="bold">SUTURA ▸</text>
+
+        <defs>
+          <marker id="arrowGreen" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto">
+            <path d="M 0 0 L 6 3 L 0 6 Z" fill="#22C870"/>
+          </marker>
+        </defs>
+      </svg>
+    </div>
+
+    <blockquote class="hero-quote">
+      "O menisco infantil é um tesouro vascular: preservar hoje é evitar artrose amanhã."
+    </blockquote>
+  </header>
+
+  <div class="divider"></div>
+
+  <!-- ============================================================
+       GRID LINHA 1: BLOCO 1 + BLOCO 2
+  ============================================================ -->
+  <div class="grid-main">
+
+    <!-- BLOCO 1: Potencial de Cura -->
+    <div class="card card-gold">
+      <span class="card-num">BLOCO 01</span>
+      <h2 class="card-title ct-gold">
+        <!-- Ícone coração vascular -->
+        <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M11 19C11 19 2 13.5 2 7.5C2 5 4 3 6.5 3C8.5 3 10 4.5 11 5.5C12 4.5 13.5 3 15.5 3C18 3 20 5 20 7.5C20 13.5 11 19 11 19Z" stroke="#C9A84C" stroke-width="1.5" fill="rgba(201,168,76,0.12)"/>
+          <path d="M7 9 L11 13 L15 9" stroke="#B22222" stroke-width="1.5" fill="none"/>
+          <circle cx="11" cy="9" r="1" fill="#E63030"/>
+        </svg>
+        Potencial de Cura
+      </h2>
+      <div class="card-body">
+        <div class="vascular-bar">
+          <div class="vascular-label">
+            <span>Vascularização Meniscal</span>
+            <span class="highlight-gold">≤ 10 anos: 100%</span>
+          </div>
+          <div class="bar-track">
+            <div class="bar-fill full"></div>
+          </div>
+        </div>
+
+        <div class="vascular-bar">
+          <div class="vascular-label">
+            <span>Cicatrização Espontânea</span>
+            <span class="highlight-green">Alta capacidade</span>
+          </div>
+          <div class="bar-track">
+            <div class="bar-fill high"></div>
+          </div>
+        </div>
+
+        <div class="stat-row">
+          <span class="stat-pill sp-gold">≤ 10 anos = 100% vascular</span>
+          <span class="stat-pill sp-red">Adulto = zona branca avascular</span>
+        </div>
+
+        <p class="mt-sm">Em crianças, <span class="highlight-gold">todo o menisco é vascularizado</span> pelos vasos perimeniscais. Esta janela biológica única confere capacidade de cicatrização que o adulto não possui.</p>
+
+        <div class="pegadinha">
+          Criança NÃO é adulto pequeno. A biologia meniscal pediátrica é fundamentalmente diferente — 100% de vascularização muda toda a conduta cirúrgica.
+        </div>
+      </div>
+    </div>
+
+    <!-- BLOCO 2: Lesões com maior potencial -->
+    <div class="card card-green">
+      <span class="card-num">BLOCO 02</span>
+      <h2 class="card-title ct-green">
+        <!-- Ícone escudo preservação -->
+        <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M11 2 L19 5.5 L19 11.5C19 16 15 19.5 11 21C7 19.5 3 16 3 11.5 L3 5.5 Z" stroke="#22C870" stroke-width="1.5" fill="rgba(34,200,112,0.08)"/>
+          <path d="M8 11 L10.5 13.5 L15 9" stroke="#22C870" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        Maior Cicatrização
+      </h2>
+      <div class="card-body">
+        <div class="stat-row">
+          <span class="stat-pill sp-green">50 – 90% de cicatrização</span>
+          <span class="stat-pill sp-teal">Zona periférica</span>
+        </div>
+
+        <p class="mt-sm">As <span class="highlight-green">lesões longitudinais periféricas</span> são as de maior potencial de cicatrização, pois ocorrem na zona vascular do menisco — onde o aporte sanguíneo perimeniscal está preservado.</p>
+
+        <ul class="bullet-list green">
+          <li><strong>Lesões longitudinais periféricas</strong> → maior chance (50–90%)</li>
+          <li>Periferia = zona ricamente vascularizada</li>
+          <li>Zona interna (branca) = avascular = não cicatriza</li>
+          <li><strong>Conduta preferencial: sutura meniscal</strong></li>
+        </ul>
+
+        <div class="algo-chain">
+          <div class="algo-step green-step">Lesão Longitudinal Periférica</div>
+          <span class="algo-arrow">→</span>
+          <div class="algo-step green-step">Zona Vascular</div>
+          <span class="algo-arrow">→</span>
+          <div class="algo-step green-step">SUTURA</div>
+        </div>
+
+        <div class="pegadinha">
+          A periferia meniscal (zona vermelha-vermelha e vermelha-branca) é a zona de ouro da cicatrização. Quanto mais periférica, maior o potencial curativo.
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /grid-main linha 1 -->
+
+
+  <!-- ============================================================
+       GRID LINHA 2: BLOCO 3 + BLOCO 4 + BLOCO 5
+  ============================================================ -->
+  <div class="grid-3">
+
+    <!-- BLOCO 3: O que evitar -->
+    <div class="card card-red">
+      <span class="card-num">BLOCO 03</span>
+      <h2 class="card-title ct-red">
+        <!-- Ícone "proibido" -->
+        <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="11" cy="11" r="8.5" stroke="#E63030" stroke-width="1.5"/>
+          <line x1="5.5" y1="5.5" x2="16.5" y2="16.5" stroke="#E63030" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        O Que Evitar
+      </h2>
+      <div class="card-body">
+
+        <!-- Sombra da osteoartrose: representação simbólica SVG -->
+        <div class="text-center" style="margin:0.5rem 0;">
+          <svg width="100" height="60" viewBox="0 0 100 60" xmlns="http://www.w3.org/2000/svg" aria-label="Osteoartrose precoce">
+            <!-- Joelho com artrose -->
+            <!-- Fêmur -->
+            <rect x="38" y="2" width="24" height="22" rx="4" fill="rgba(178,34,34,0.25)" stroke="#B22222" stroke-width="1.2"/>
+            <!-- Tibia -->
+            <rect x="38" y="36" width="24" height="22" rx="4" fill="rgba(178,34,34,0.25)" stroke="#B22222" stroke-width="1.2"/>
+            <!-- Espaço articular comprometido (sem menisco) -->
+            <rect x="35" y="24" width="30" height="12" rx="2" fill="rgba(255,50,50,0.12)" stroke="#E63030" stroke-width="1" stroke-dasharray="3,2"/>
+            <!-- X = menisco ausente -->
+            <line x1="44" y1="26" x2="56" y2="34" stroke="#E63030" stroke-width="1.5" opacity="0.8"/>
+            <line x1="56" y1="26" x2="44" y2="34" stroke="#E63030" stroke-width="1.5" opacity="0.8"/>
+            <!-- Osteófitos simbólicos -->
+            <path d="M35 28 L29 25 L33 30 Z" fill="#B22222" opacity="0.7"/>
+            <path d="M65 28 L71 25 L67 30 Z" fill="#B22222" opacity="0.7"/>
+            <path d="M35 32 L29 35 L33 30 Z" fill="#B22222" opacity="0.7"/>
+            <path d="M65 32 L71 35 L67 30 Z" fill="#B22222" opacity="0.7"/>
+            <!-- Label -->
+            <text x="50" y="57" font-family="monospace" font-size="7" fill="#FF6B6B" text-anchor="middle" font-weight="bold">OA PRECOCE</text>
+          </svg>
+        </div>
+
+        <ul class="bullet-list red">
+          <li><strong>Meniscectomia</strong> em criança = tratamento inadequado</li>
+          <li>Indicada APENAS quando sem possibilidade de preservação</li>
+          <li>Consequência direta: <span class="highlight-red">osteoartrose precoce</span></li>
+          <li>Perda da função biomecânica meniscal</li>
+        </ul>
+
+        <div class="pegadinha red-trap">
+          "Tirar o menisco hoje é chamar a artrose amanhã." — Meniscectomia em criança sem esgotamento da sutura é erro de conduta.
+        </div>
+      </div>
+    </div>
+
+    <!-- BLOCO 4: Teste Clínico -->
+    <div class="card card-teal">
+      <span class="card-num">BLOCO 04</span>
+      <h2 class="card-title ct-teal">
+        <!-- Ícone joelho flexão -->
+        <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M5 3 L11 11 L17 19" stroke="#1AB8A0" stroke-width="2" stroke-linecap="round"/>
+          <circle cx="11" cy="11" r="3" stroke="#1AB8A0" stroke-width="1.5" fill="rgba(26,184,160,0.1)"/>
+          <!-- Arco de 40° -->
+          <path d="M 11 11 m 0 0 A 5 5 0 0 1 15 8" stroke="#1AB8A0" stroke-width="1" fill="none" stroke-dasharray="2,1.5" opacity="0.7"/>
+          <text x="13" y="8.5" font-family="monospace" font-size="5" fill="#1AB8A0">40°</text>
+        </svg>
+        Teste Clínico
+      </h2>
+      <div class="card-body">
+        <div class="stat-row">
+          <span class="stat-pill sp-teal">McMurray Modificado</span>
+          <span class="stat-pill sp-teal">40° flexão</span>
+        </div>
+
+        <p class="mt-sm">O <span class="highlight-teal">McMurray Modificado Pediátrico</span> é realizado com o joelho em <span class="highlight-teal">40° de flexão</span> (diferente do adulto, onde se usa maior flexão). A rotação interna/externa sob carga compressiva reproduce a dor meniscal.</p>
+
+        <div class="mnemonic-box">
+          <p class="mnem-label">🧠 Mnemônico Cinematográfico N6</p>
+          <p class="mnem-text">"McMurray dobra o joelho aos 40 graus."</p>
+        </div>
+
+        <ul class="bullet-list teal">
+          <li>Paciente em decúbito dorsal</li>
+          <li>Joelho em <strong>40° de flexão</strong></li>
+          <li>Rotação interna: menisco lateral</li>
+          <li>Rotação externa: menisco medial</li>
+          <li>Clique + dor = sinal positivo</li>
+        </ul>
+
+        <div class="pegadinha">
+          No adulto o McMurray clássico é feito com maior flexão. Na criança: 40°. Essa diferença aparece em prova!
+        </div>
+      </div>
+    </div>
+
+    <!-- BLOCO 5: Imagem -->
+    <div class="card card-teal">
+      <span class="card-num">BLOCO 05</span>
+      <h2 class="card-title ct-teal">
+        <!-- Ícone RNM -->
+        <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="2" y="5" width="18" height="12" rx="3" stroke="#1AB8A0" stroke-width="1.5" fill="rgba(26,184,160,0.08)"/>
+          <circle cx="11" cy="11" r="3" stroke="#1AB8A0" stroke-width="1.5" fill="rgba(26,184,160,0.15)"/>
+          <line x1="8" y1="11" x2="5" y2="11" stroke="#1AB8A0" stroke-width="1.2"/>
+          <line x1="14" y1="11" x2="17" y2="11" stroke="#1AB8A0" stroke-width="1.2"/>
+          <line x1="11" y1="8" x2="11" y2="5" stroke="#1AB8A0" stroke-width="1.2"/>
+          <line x1="11" y1="14" x2="11" y2="17" stroke="#1AB8A0" stroke-width="1.2"/>
+        </svg>
+        Exame de Imagem
+      </h2>
+      <div class="card-body">
+
+        <div class="img-cards">
+          <!-- RNM -->
+          <div class="img-card choice">
+            <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="4" y="10" width="40" height="28" rx="6" stroke="#1AB8A0" stroke-width="1.8" fill="rgba(26,184,160,0.07)"/>
+              <circle cx="24" cy="24" r="8" stroke="#1AB8A0" stroke-width="1.5" fill="rgba(26,184,160,0.12)"/>
+              <!-- Gradiente de sinal meniscal -->
+              <path d="M20 24 Q22 20 24 24 Q26 28 28 24" stroke="#1AB8A0" stroke-width="1.5" fill="none"/>
+              <!-- Linhas de campo magnético -->
+              <line x1="4" y1="18" x2="10" y2="18" stroke="#1AB8A0" stroke-width="0.8" opacity="0.5"/>
+              <line x1="4" y1="24" x2="10" y2="24" stroke="#1AB8A0" stroke-width="0.8" opacity="0.5"/>
+              <line x1="4" y1="30" x2="10" y2="30" stroke="#1AB8A0" stroke-width="0.8" opacity="0.5"/>
+              <line x1="38" y1="18" x2="44" y2="18" stroke="#1AB8A0" stroke-width="0.8" opacity="0.5"/>
+              <line x1="38" y1="24" x2="44" y2="24" stroke="#1AB8A0" stroke-width="0.8" opacity="0.5"/>
+              <line x1="38" y1="30" x2="44" y2="30" stroke="#1AB8A0" stroke-width="0.8" opacity="0.5"/>
+              <!-- Estrela de escolha -->
+              <text x="36" y="12" font-family="monospace" font-size="10" fill="#C9A84C">★</text>
+            </svg>
+            <p class="img-card-title">RNM</p>
+            <p class="img-card-desc">Exame de <strong style="color:#1AB8A0">ESCOLHA</strong><br>Avalia meniscos com precisão</p>
+          </div>
+
+          <!-- Radiografia -->
+          <div class="img-card rx-card">
+            <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <!-- Placa rx -->
+              <rect x="8" y="6" width="32" height="36" rx="3" stroke="#8A94A8" stroke-width="1.5" fill="rgba(255,255,255,0.03)"/>
+              <!-- Joelho esquemático em rx -->
+              <rect x="18" y="8" width="12" height="14" rx="2" fill="rgba(200,208,220,0.15)" stroke="#8A94A8" stroke-width="1"/>
+              <rect x="18" y="28" width="12" height="14" rx="2" fill="rgba(200,208,220,0.15)" stroke="#8A94A8" stroke-width="1"/>
+              <!-- Espaço articular -->
+              <line x1="18" y1="25" x2="30" y2="25" stroke="#8A94A8" stroke-width="0.8" stroke-dasharray="2,1"/>
+              <!-- Cruz rx -->
+              <line x1="8" y1="42" x2="12" y2="42" stroke="#8A94A8" stroke-width="1.5"/>
+              <line x1="10" y1="40" x2="10" y2="44" stroke="#8A94A8" stroke-width="1.5"/>
+            </svg>
+            <p class="img-card-title" style="color:#8A94A8">RADIOGRAFIA</p>
+            <p class="img-card-desc">Excluir diferenciais<br>Lesões ósseas assoc.</p>
+          </div>
+        </div>
+
+        <div class="pegadinha">
+          <strong>RNM = exame de escolha para menisco.</strong> Radiografias são complementares para excluir diferenciais (fratura de Salter-Harris, osteocondrite). Prova cobra isso direto.
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /grid-3 -->
+
+
+  <!-- ============================================================
+       REGRA DE OURO
+  ============================================================ -->
+  <div class="golden-rule">
+    <h2 class="gr-title">
+      <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <polygon points="13,2 16,9 24,9 18,14 20,22 13,17 6,22 8,14 2,9 10,9" stroke="#C9A84C" stroke-width="1.5" fill="rgba(201,168,76,0.15)"/>
+      </svg>
+      Regra de Ouro
+    </h2>
+
+    <div class="algo-chain">
+      <div class="algo-step green-step">Criança</div>
+      <span class="algo-arrow">→</span>
+      <div class="algo-step green-step">Menisco<br>Vascularizado</div>
+      <span class="algo-arrow">→</span>
+      <div class="algo-step green-step">Preservar<br>Menisco</div>
+      <span class="algo-arrow">→</span>
+      <div class="algo-step green-step">Sutura<br>Meniscal</div>
+      <span class="algo-arrow">→</span>
+      <div class="algo-step red-step">Evitar<br>Meniscectomia</div>
+      <span class="algo-arrow">→</span>
+      <div class="algo-step red-step">Evitar<br>OA Precoce</div>
+    </div>
+
+    <p style="font-size:0.88rem; color:#C8D0E0; margin-top:1rem;">
+      O raciocínio cirúrgico pediátrico parte de um princípio único: <span class="highlight-gold">a biologia está a favor da criança</span>. Usar essa janela terapêutica para sutura é obrigação — a meniscectomia deve ser o último recurso absoluto, reservada para lesões completamente inviáveis.
+    </p>
+
+    <div class="stat-row" style="margin-top:1rem;">
+      <span class="stat-pill sp-gold">Preservação ≫ Ressecção</span>
+      <span class="stat-pill sp-green">Sutura = tratamento de escolha</span>
+      <span class="stat-pill sp-red">Meniscectomia = última opção</span>
+    </div>
+  </div>
+
+
+  <!-- ============================================================
+       PEGADINHAS COMPILADAS
+  ============================================================ -->
+  <div class="grid-main">
+    <div class="card" style="grid-column:span 2; background:linear-gradient(135deg, #0a0c16, #0d1020);">
+      <h2 class="card-title" style="color:#F0D080; font-size:1.2rem;">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M10 2 L12 8 L18 8 L13 12 L15 18 L10 14 L5 18 L7 12 L2 8 L8 8 Z" stroke="#C9A84C" stroke-width="1.3" fill="rgba(201,168,76,0.1)"/>
+        </svg>
+        Pegadinhas que Aparecem em Prova
+      </h2>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.75rem; margin-top:0.5rem;">
+        <div class="pegadinha">Criança ≠ adulto pequeno: preservar o menisco é <em>sempre</em> a prioridade.</div>
+        <div class="pegadinha">Lesão periférica longitudinal tem <em>maior</em> chance de cicatrizar (50–90%).</div>
+        <div class="pegadinha red-trap">Meniscectomia em criança eleva risco de osteoartrose precoce — erro de conduta se havia possibilidade de sutura.</div>
+        <div class="pegadinha">RNM é o exame de <em>escolha</em> para avaliação meniscal — radiografia é complementar.</div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ============================================================
+       RESUMO RÁPIDO
+  ============================================================ -->
+  <div class="summary-strip">
+    <h2 class="summary-title">
+      ⚡ Resumo Rápido — Revise em 30 Segundos
+    </h2>
+    <div class="summary-grid">
+      <div class="summary-item">
+        <span class="si-value">100%</span>
+        <p class="si-label">Vascularização meniscal em crianças até 10 anos</p>
+      </div>
+      <div class="summary-item">
+        <span class="si-value" style="color:#FF8080;">Longitudinal Periférica</span>
+        <p class="si-label">Tipo de lesão com maior potencial de cicatrização</p>
+      </div>
+      <div class="summary-item">
+        <span class="si-value" style="color:#22C870;">50–90%</span>
+        <p class="si-label">Taxa de cicatrização nas lesões periféricas</p>
+      </div>
+      <div class="summary-item">
+        <span class="si-value" style="color:#22C870;">Sutura</span>
+        <p class="si-label">Conduta preferencial — preservar é obrigação</p>
+      </div>
+      <div class="summary-item">
+        <span class="si-value" style="color:#FF6B6B;">Evitar Meniscectomia</span>
+        <p class="si-label">Aumenta risco de OA precoce em crianças</p>
+      </div>
+      <div class="summary-item">
+        <span class="si-value" style="color:#1AB8A0;">RNM ★</span>
+        <p class="si-label">Exame de escolha para avaliação meniscal pediátrica</p>
+      </div>
+    </div>
+
+    <div style="margin-top:1.2rem;">
+      <div class="mnemonic-box">
+        <p class="mnem-label">Frase de Memorização Final</p>
+        <p class="mnem-text" style="font-size:1.05rem; color:#F0D080;">
+          "Até 10 anos = 100% vascular → Periférica longitudinal → Sutura → Nunca tire o menisco da criança."
+        </p>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ============================================================
+       FOOTER
+  ============================================================ -->
+  <footer class="footer">
+    <p class="footer-phrase">
+      "Tirar o menisco hoje é chamar a artrose amanhã. Preserve sempre que possível."
+    </p>
+    <p class="footer-sig">Dra. Danniele Cruz</p>
+    <p class="footer-role">Ortopedista · Revisão TEOT · Material Educacional</p>
+    <p style="font-family:var(--font-mono); font-size:0.6rem; color:rgba(138,148,168,0.35); margin-top:1.2rem; letter-spacing:0.1em;">
+      ORTOPEDIA PEDIÁTRICA · LESÕES MENISCAIS · TEOT
+    </p>
+  </footer>
+
+</div><!-- /wrapper -->
+
+</body>
+</html>
