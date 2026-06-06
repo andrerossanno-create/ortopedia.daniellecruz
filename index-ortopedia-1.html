@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Atlas Ortopédico Interativo — Revisão gratuita para TEOT, por Dra. Danielle Cruz. Ortopedia Pediátrica, Trauma e Cirurgia.">
+<title>Atlas Ortopédico Interativo | Dra. Danielle Cruz</title>
+<style>
+/* ============================================================
+   FONTS
+============================================================ */
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Nunito:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400&family=IBM+Plex+Mono:wght@400;600&family=Dancing+Script:wght@700&display=swap');
+
+/* ============================================================
+   CUSTOM PROPERTIES — Paleta Ortopedia: osso, aço, âmbar
+============================================================ */
+:root {
+  --amber:       #D4922A;
+  --amber-light: #F0C060;
+  --amber-dim:   #6B4510;
+  --steel:       #7A8FA8;
+  --steel-light: #B8CAD8;
+  --steel-dim:   #2A3848;
+  --bone:        #E8DCC8;
+  --bone-dim:    #A89878;
+  --teal:        #1AB8A0;
+  --teal-dim:    #0A5048;
+  --red:         #C03030;
+  --red-bright:  #E84040;
+  --green:       #28A860;
+  --green-bright:#38D880;
+  --navy:        #06080E;
+  --bg-card:     #0C0F1A;
+  --bg-card2:    #0F1220;
+  --border-soft: rgba(255,255,255,0.05);
+  --border-amber:rgba(212,146,42,0.35);
+  --border-steel:rgba(122,143,168,0.3);
+  --border-teal: rgba(26,184,160,0.35);
+  --text-white:  #F0F2F6;
+  --text-muted:  #7A84A0;
+  --text-dim:    #404860;
+  --font-display:'Bebas Neue', 'Trebuchet MS', sans-serif;
+  --font-body:   'Nunito', 'Trebuchet MS', Arial, sans-serif;
+  --font-mono:   'IBM Plex Mono', monospace;
+  --font-sig:    'Dancing Script', cursive;
+  --radius:      14px;
+  --t:           0.22s ease;
+}
+
+/* ============================================================
+   RESET & BASE
+============================================================ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--navy);
+  color: var(--text-white);
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.65;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+a { color: inherit; text-decoration: none; }
+
+/* ============================================================
+   GRAIN + VIGNETTE
+============================================================ */
+body::before {
+  content: '';
+  position: fixed; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  background-size: 200px; pointer-events: none; z-index: 0; opacity: 0.28;
+}
+body::after {
+  content: '';
+  position: fixed; inset: 0;
+  background: radial-gradient(ellipse at 50% 0%, transparent 35%, rgba(0,0,0,0.72) 100%);
+  pointer-events: none; z-index: 0;
+}
+
+/* ============================================================
+   LAYOUT
+============================================================ */
+.page { position: relative; z-index: 1; }
+.container { max-width: 1160px; margin: 0 auto; padding: 0 1.25rem; }
+
+/* ============================================================
+   TOPBAR
+============================================================ */
+.topbar {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(6,8,14,0.93);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(212,146,42,0.15);
+  padding: 0.65rem 0;
+}
+.topbar-inner {
+  display: flex; align-items: center;
+  justify-content: space-between; gap: 1rem;
+}
+.topbar-logo {
+  font-family: var(--font-display);
+  font-size: 1.3rem; letter-spacing: 0.08em;
+  background: linear-gradient(to right, var(--amber-light), var(--amber));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  white-space: nowrap;
+}
+.topbar-sub {
+  font-family: var(--font-mono); font-size: 0.58rem;
+  letter-spacing: 0.18em; color: var(--text-muted); text-transform: uppercase;
+}
+.topbar-badge {
+  font-family: var(--font-mono); font-size: 0.6rem;
+  letter-spacing: 0.12em; color: var(--teal);
+  background: rgba(26,184,160,0.1);
+  border: 1px solid rgba(26,184,160,0.3);
+  border-radius: 100px; padding: 0.2rem 0.75rem; white-space: nowrap;
+}
+
+/* ============================================================
+   HERO
+============================================================ */
+.hero {
+  padding: 5rem 0 3.5rem;
+  text-align: center; position: relative; overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute; top: 40%; left: 50%; transform: translate(-50%,-50%);
+  width: 750px; height: 380px;
+  background: radial-gradient(ellipse, rgba(212,146,42,0.09) 0%, transparent 70%);
+  pointer-events: none;
+}
+.hero::after {
+  content: '';
+  position: absolute; bottom: 0; left: 10%; right: 10%; height: 1px;
+  background: linear-gradient(to right, transparent, var(--amber-dim), var(--amber), var(--amber-dim), transparent);
+  opacity: 0.45;
+}
+
+/* SVG osso decorativo */
+.hero-bone-deco {
+  display: flex; justify-content: center;
+  margin-bottom: 1.2rem; opacity: 0.25;
+}
+
+.hero-kicker {
+  font-family: var(--font-mono); font-size: 0.68rem;
+  letter-spacing: 0.25em; color: var(--amber);
+  text-transform: uppercase; margin-bottom: 0.9rem; opacity: 0.85;
+}
+.hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.8rem, 8vw, 6rem);
+  line-height: 0.92; letter-spacing: 0.04em; text-transform: uppercase;
+  background: linear-gradient(135deg, var(--amber-light) 0%, var(--amber) 50%, #7A4810 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  filter: drop-shadow(0 0 40px rgba(212,146,42,0.2));
+  margin-bottom: 0.3rem;
+}
+.hero-title-line2 {
+  font-family: var(--font-display);
+  font-size: clamp(1rem, 3.2vw, 2rem);
+  letter-spacing: 0.22em; color: var(--text-muted);
+  text-transform: uppercase; margin-bottom: 1.4rem;
+}
+.hero-desc {
+  max-width: 540px; margin: 0 auto 2rem;
+  font-size: clamp(0.87rem, 1.8vw, 0.98rem);
+  color: #9AA4BC; line-height: 1.72;
+}
+
+/* Hero stats */
+.hero-stats {
+  display: flex; justify-content: center;
+  gap: 2rem; flex-wrap: wrap; margin-bottom: 0.5rem;
+}
+.hero-stat { text-align: center; }
+.hs-num {
+  font-family: var(--font-display);
+  font-size: clamp(1.7rem, 4vw, 2.6rem); line-height: 1;
+  background: linear-gradient(to bottom, var(--amber-light), var(--amber));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+.hs-label {
+  font-family: var(--font-mono); font-size: 0.62rem;
+  letter-spacing: 0.14em; color: var(--text-muted);
+  text-transform: uppercase; margin-top: 0.1rem;
+}
+
+/* Search */
+.search-wrap {
+  max-width: 480px; margin: 2rem auto 0; position: relative;
+}
+.search-input {
+  width: 100%;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(212,146,42,0.25);
+  border-radius: 100px;
+  padding: 0.75rem 3rem 0.75rem 1.25rem;
+  font-family: var(--font-body); font-size: 0.88rem;
+  color: var(--text-white); outline: none;
+  transition: border-color var(--t), box-shadow var(--t);
+}
+.search-input::placeholder { color: var(--text-dim); }
+.search-input:focus {
+  border-color: rgba(212,146,42,0.55);
+  box-shadow: 0 0 0 3px rgba(212,146,42,0.08);
+}
+.search-icon {
+  position: absolute; right: 1.1rem; top: 50%;
+  transform: translateY(-50%); color: var(--text-muted);
+  font-size: 0.85rem; pointer-events: none;
+}
+
+/* ============================================================
+   FILTERS
+============================================================ */
+.filters {
+  display: flex; gap: 0.5rem; flex-wrap: wrap;
+  justify-content: center; margin: 2.5rem 0 2rem;
+}
+.filter-btn {
+  font-family: var(--font-mono); font-size: 0.66rem;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 0.35rem 0.9rem; border-radius: 100px;
+  border: 1px solid var(--border-soft);
+  background: transparent; color: var(--text-muted);
+  cursor: pointer; transition: all var(--t);
+}
+.filter-btn:hover, .filter-btn.active {
+  border-color: var(--amber); color: var(--amber-light);
+  background: rgba(212,146,42,0.08);
+}
+
+/* ============================================================
+   SECTION HEADER
+============================================================ */
+.section-header {
+  display: flex; align-items: baseline;
+  gap: 0.75rem; margin-bottom: 1.1rem;
+}
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.05rem, 2.6vw, 1.5rem);
+  letter-spacing: 0.08em; text-transform: uppercase; color: var(--amber-light);
+}
+.section-count {
+  font-family: var(--font-mono); font-size: 0.63rem;
+  letter-spacing: 0.12em; color: var(--text-dim);
+}
+.section-divider {
+  height: 1px;
+  background: linear-gradient(to right, rgba(212,146,42,0.3), transparent);
+  margin-bottom: 1.4rem;
+}
+
+/* ============================================================
+   MODULE GRID
+============================================================ */
+.module-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(275px, 1fr));
+  gap: 1rem; margin-bottom: 3rem;
+}
+
+/* ============================================================
+   MODULE CARD
+============================================================ */
+.mod-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius);
+  padding: 1.35rem 1.45rem 1.25rem;
+  position: relative; overflow: hidden;
+  transition: transform var(--t), box-shadow var(--t), border-color var(--t);
+  cursor: pointer;
+  display: flex; flex-direction: column; gap: 0.45rem;
+  text-decoration: none;
+  animation: fadeUp 0.4s ease both;
+}
+.mod-card::before {
+  content: ''; position: absolute;
+  top: 0; left: 0; right: 0; height: 2px;
+  border-radius: var(--radius) var(--radius) 0 0;
+  opacity: 0; transition: opacity var(--t);
+}
+.mod-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.55); }
+.mod-card:hover::before { opacity: 1; }
+
+/* Color variants */
+.mod-card.amber  { --accent:#D4922A; --accent-bg:rgba(212,146,42,0.06); }
+.mod-card.teal   { --accent:#1AB8A0; --accent-bg:rgba(26,184,160,0.06); }
+.mod-card.steel  { --accent:#7A8FA8; --accent-bg:rgba(122,143,168,0.06); }
+.mod-card.red    { --accent:#E84040; --accent-bg:rgba(232,64,64,0.06); }
+.mod-card.green  { --accent:#38D880; --accent-bg:rgba(56,216,128,0.06); }
+.mod-card.bone   { --accent:#E8DCC8; --accent-bg:rgba(232,220,200,0.04); }
+
+.mod-card:hover  { border-color: var(--accent, var(--amber)); background: var(--accent-bg, rgba(212,146,42,0.05)); }
+.mod-card::before{ background: linear-gradient(to right, transparent, var(--accent, var(--amber)), transparent); }
+
+/* Featured */
+.mod-card.featured {
+  grid-column: span 2;
+  flex-direction: row; align-items: flex-start; gap: 1.5rem; padding: 1.6rem 2rem;
+  background: linear-gradient(135deg, #0C0F1A 0%, #101520 100%);
+}
+.featured-left {
+  flex-shrink: 0; display: flex; flex-direction: column;
+  align-items: center; gap: 0.5rem;
+}
+.featured-icon { font-size: 2.5rem; }
+.featured-right { flex: 1; }
+.featured-right .mod-title { font-size: clamp(1.15rem, 2.4vw, 1.55rem); }
+
+/* Locked */
+.mod-card.locked { opacity: 0.4; pointer-events: none; }
+.mod-card.locked::after {
+  content: 'EM BREVE'; position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%,-50%);
+  font-family: var(--font-mono); font-size: 0.68rem;
+  letter-spacing: 0.2em; color: var(--text-muted);
+  background: rgba(6,8,14,0.88); padding: 0.3rem 0.8rem;
+  border-radius: 4px; border: 1px solid var(--border-soft);
+}
+
+/* Card internals */
+.mod-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 0.5rem; }
+.mod-icon { font-size: 1.35rem; line-height: 1; flex-shrink: 0; }
+.mod-badges { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; }
+
+.badge {
+  font-family: var(--font-mono); font-size: 0.56rem;
+  letter-spacing: 0.1em; padding: 0.14rem 0.44rem;
+  border-radius: 4px; border: 1px solid; white-space: nowrap;
+}
+.badge-novo  { color:#38D880; border-color:rgba(56,216,128,0.4); background:rgba(56,216,128,0.07); }
+.badge-teot  { color:var(--amber); border-color:rgba(212,146,42,0.38); background:rgba(212,146,42,0.07); }
+.badge-ped   { color:var(--teal); border-color:rgba(26,184,160,0.38); background:rgba(26,184,160,0.07); }
+.badge-trauma{ color:#E84040; border-color:rgba(232,64,64,0.38); background:rgba(232,64,64,0.07); }
+.badge-onco  { color:#C080FF; border-color:rgba(192,128,255,0.38); background:rgba(192,128,255,0.07); }
+.badge-reab  { color:var(--steel-light); border-color:rgba(184,202,216,0.3); background:rgba(184,202,216,0.05); }
+
+.mod-number {
+  font-family: var(--font-mono); font-size: 0.59rem;
+  letter-spacing: 0.17em; color: var(--text-dim); text-transform: uppercase;
+}
+.mod-title {
+  font-family: var(--font-display);
+  font-size: clamp(0.98rem, 2vw, 1.18rem);
+  letter-spacing: 0.05em; text-transform: uppercase;
+  color: var(--text-white); line-height: 1.15;
+}
+.mod-desc {
+  font-size: 0.8rem; color: var(--text-muted);
+  line-height: 1.5; flex: 1;
+}
+.mod-footer {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-top: 0.4rem; padding-top: 0.55rem;
+  border-top: 1px solid var(--border-soft);
+}
+.mod-tag {
+  font-family: var(--font-mono); font-size: 0.59rem;
+  letter-spacing: 0.09em; color: var(--accent, var(--amber));
+  opacity: 0.65; text-transform: uppercase;
+}
+.mod-arrow {
+  font-size: 0.75rem; color: var(--accent, var(--amber));
+  opacity: 0; transform: translateX(-4px);
+  transition: opacity var(--t), transform var(--t);
+}
+.mod-card:hover .mod-arrow { opacity: 1; transform: translateX(0); }
+
+/* ============================================================
+   SPECIALTY SECTION
+============================================================ */
+.specialty-section { margin-bottom: 4rem; }
+
+/* ============================================================
+   FOOTER
+============================================================ */
+.footer {
+  border-top: 1px solid var(--border-soft);
+  padding: 3rem 0 2rem; text-align: center;
+}
+.footer-logo {
+  font-family: var(--font-display); font-size: 1.5rem;
+  letter-spacing: 0.1em;
+  background: linear-gradient(to right, var(--amber-light), var(--amber));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  margin-bottom: 0.25rem;
+}
+.footer-sig {
+  font-family: var(--font-sig); font-size: 1.6rem;
+  color: var(--amber-light);
+  filter: drop-shadow(0 0 12px rgba(212,146,42,0.28));
+  margin-bottom: 0.3rem;
+}
+.footer-role {
+  font-family: var(--font-mono); font-size: 0.62rem;
+  letter-spacing: 0.18em; color: var(--text-dim);
+  text-transform: uppercase; margin-bottom: 1.5rem;
+}
+.footer-phrase {
+  font-size: 0.84rem; font-style: italic;
+  color: var(--text-muted); max-width: 460px;
+  margin: 0 auto 1.5rem;
+}
+.footer-links { display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap; }
+.footer-link {
+  font-family: var(--font-mono); font-size: 0.63rem;
+  letter-spacing: 0.12em; color: var(--text-dim);
+  text-transform: uppercase; transition: color var(--t);
+}
+.footer-link:hover { color: var(--amber); }
+.footer-copy {
+  font-family: var(--font-mono); font-size: 0.57rem;
+  letter-spacing: 0.1em; color: rgba(64,72,96,0.5); margin-top: 2rem;
+}
+
+/* Scroll top */
+.scroll-top {
+  position: fixed; bottom: 1.5rem; right: 1.5rem;
+  width: 40px; height: 40px;
+  background: rgba(212,146,42,0.1);
+  border: 1px solid rgba(212,146,42,0.3);
+  border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  font-size: 1rem; color: var(--amber);
+  cursor: pointer; opacity: 0; transition: opacity var(--t), background var(--t); z-index: 90;
+}
+.scroll-top.visible { opacity: 1; }
+.scroll-top:hover { background: rgba(212,146,42,0.2); }
+
+/* ============================================================
+   RESPONSIVE
+============================================================ */
+@media (max-width: 768px) {
+  .mod-card.featured { grid-column: span 1; flex-direction: column; }
+  .module-grid { grid-template-columns: 1fr; }
+  .hero-stats { gap: 1.4rem; }
+  .topbar-badge { display: none; }
+}
+
+/* Hidden for search/filter */
+.mod-card.hidden { display: none; }
+
+/* Animate in */
+@keyframes fadeUp {
+  from { opacity:0; transform:translateY(14px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+.mod-card:nth-child(1)  { animation-delay:.05s; }
+.mod-card:nth-child(2)  { animation-delay:.1s; }
+.mod-card:nth-child(3)  { animation-delay:.15s; }
+.mod-card:nth-child(4)  { animation-delay:.2s; }
+.mod-card:nth-child(n+5){ animation-delay:.25s; }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- TOPBAR -->
+  <nav class="topbar">
+    <div class="container">
+      <div class="topbar-inner">
+        <div>
+          <div class="topbar-logo">Atlas Ortopédico Interativo</div>
+          <div class="topbar-sub">Dra. Danielle Cruz · TEOT</div>
+        </div>
+        <span class="topbar-badge">TEOT · Acesso Gratuito</span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="container">
+
+      <!-- Osso decorativo SVG -->
+      <div class="hero-bone-deco">
+        <svg width="280" height="48" viewBox="0 0 280 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Osso longo horizontal decorativo -->
+          <circle cx="24" cy="24" r="18" stroke="#D4922A" stroke-width="1.5" fill="rgba(212,146,42,0.06)"/>
+          <circle cx="24" cy="24" r="10" stroke="#D4922A" stroke-width="1" fill="rgba(212,146,42,0.04)" opacity="0.6"/>
+          <rect x="42" y="20" width="196" height="8" rx="4" fill="rgba(212,146,42,0.15)" stroke="#D4922A" stroke-width="1.2"/>
+          <circle cx="256" cy="24" r="18" stroke="#D4922A" stroke-width="1.5" fill="rgba(212,146,42,0.06)"/>
+          <circle cx="256" cy="24" r="10" stroke="#D4922A" stroke-width="1" fill="rgba(212,146,42,0.04)" opacity="0.6"/>
+          <!-- Linhas trabeculares -->
+          <line x1="80"  y1="20" x2="80"  y2="28" stroke="#D4922A" stroke-width="0.8" opacity="0.4"/>
+          <line x1="110" y1="20" x2="110" y2="28" stroke="#D4922A" stroke-width="0.8" opacity="0.4"/>
+          <line x1="140" y1="18" x2="140" y2="30" stroke="#D4922A" stroke-width="1"   opacity="0.5"/>
+          <line x1="170" y1="20" x2="170" y2="28" stroke="#D4922A" stroke-width="0.8" opacity="0.4"/>
+          <line x1="200" y1="20" x2="200" y2="28" stroke="#D4922A" stroke-width="0.8" opacity="0.4"/>
+        </svg>
+      </div>
+
+      <p class="hero-kicker">Ortopedia Pediátrica · Trauma · Cirurgia · TEOT 2025/2026</p>
+      <h1 class="hero-title">Atlas Ortopédico</h1>
+      <p class="hero-title-line2">Interativo</p>
+      <p class="hero-desc">
+        Plataforma gratuita de revisão cinematográfica para médicos em preparação para o
+        <strong style="color:var(--amber-light)">TEOT</strong>. Módulos interativos com casos clínicos, infográficos e memorização visual de alto impacto.
+      </p>
+
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <div class="hs-num">10+</div>
+          <div class="hs-label">Módulos</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hs-num">100%</div>
+          <div class="hs-label">Gratuito</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hs-num">TEOT</div>
+          <div class="hs-label">Focado</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hs-num">N7</div>
+          <div class="hs-label">Método</div>
+        </div>
+      </div>
+
+      <div class="search-wrap">
+        <input class="search-input" type="search" id="searchInput"
+               placeholder="Buscar módulo... ex: menisco, fratura, joelho"
+               autocomplete="off">
+        <span class="search-icon">🔍</span>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+
+      <!-- FILTROS -->
+      <div class="filters">
+        <button class="filter-btn active" data-cat="todos">Todos</button>
+        <button class="filter-btn" data-cat="pediatrica">Pediátrica</button>
+        <button class="filter-btn" data-cat="joelho">Joelho</button>
+        <button class="filter-btn" data-cat="ombro">Ombro</button>
+        <button class="filter-btn" data-cat="trauma">Trauma</button>
+        <button class="filter-btn" data-cat="coluna">Coluna</button>
+        <button class="filter-btn" data-cat="quadril">Quadril</button>
+        <button class="filter-btn" data-cat="pe">Pé &amp; Tornozelo</button>
+      </div>
+
+      <!-- ============================================================
+           ORTOPEDIA PEDIÁTRICA
+      ============================================================ -->
+      <section class="specialty-section" id="pediatrica">
+        <div class="section-header">
+          <h2 class="section-title">🦴 Ortopedia Pediátrica</h2>
+          <span class="section-count">TEOT · Revisão Cirúrgica</span>
+        </div>
+        <div class="section-divider"></div>
+
+        <div class="module-grid">
+
+          <!-- MÓDULO 01 — Lesões Meniscais Pediátricas (ATIVO) -->
+          <a href="lesoes-meniscais-pediatricas.html" class="mod-card amber featured" data-cat="pediatrica joelho">
+            <div class="featured-left">
+              <span class="featured-icon">🦴</span>
+              <span class="badge badge-novo">NOVO</span>
+              <span class="badge badge-teot">TEOT</span>
+              <span class="badge badge-ped">PEDIÁTRICA</span>
+            </div>
+            <div class="featured-right">
+              <div class="mod-number">ORTOPEDIA PEDIÁTRICA · MÓDULO 01</div>
+              <div class="mod-title">Lesões Meniscais Pediátricas</div>
+              <div class="mod-desc">
+                Potencial de vascularização até 10 anos (100%), lesões longitudinais periféricas com 50–90% de cicatrização, conduta preferencial de sutura meniscal, McMurray Modificado a 40°, RNM como exame de escolha. Pegadinhas de prova compiladas. Infográfico cinematográfico completo.
+              </div>
+              <div class="mod-footer">
+                <span class="mod-tag">lesoes-meniscais-pediatricas.html</span>
+                <span class="mod-arrow">→</span>
+              </div>
+            </div>
+          </a>
+
+          <!-- EM BREVE: Displasia do Desenvolvimento do Quadril -->
+          <div class="mod-card teal locked" data-cat="pediatrica quadril">
+            <div class="mod-top">
+              <span class="mod-icon">👶</span>
+              <div class="mod-badges"><span class="badge badge-ped">PEDIÁTRICA</span></div>
+            </div>
+            <div class="mod-number">EM PRODUÇÃO</div>
+            <div class="mod-title">DDQ — Displasia do Desenvolvimento</div>
+            <div class="mod-desc">Diagnóstico precoce, índice acetabular, tratamento conservador vs. cirúrgico, osteotomias pélvicas.</div>
+            <div class="mod-footer"><span class="mod-tag">Em breve</span></div>
+          </div>
+
+          <!-- EM BREVE: Doença de Perthes -->
+          <div class="mod-card teal locked" data-cat="pediatrica quadril">
+            <div class="mod-top">
+              <span class="mod-icon">🦴</span>
+              <div class="mod-badges"><span class="badge badge-ped">PEDIÁTRICA</span></div>
+            </div>
+            <div class="mod-number">EM PRODUÇÃO</div>
+            <div class="mod-title">Doença de Perthes</div>
+            <div class="mod-desc">Necrose avascular da cabeça femoral, classificação de Herring, tratamento por fase, prognóstico.</div>
+            <div class="mod-footer"><span class="mod-tag">Em breve</span></div>
+          </div>
+
+          <!-- EM BREVE: Epifisiólise -->
+          <div class="mod-card teal locked" data-cat="pediatrica quadril">
+            <div class="mod-top">
+              <span class="mod-icon">⚡</span>
+              <div class="mod-badges"><span class="badge badge-ped">PEDIÁTRICA</span></div>
+            </div>
+            <div class="mod-number">EM PRODUÇÃO</div>
+            <div class="mod-title">Epifisiólise da Cabeça Femoral</div>
+            <div class="mod-desc">Classificação de Loder, estabilidade, fixação in situ, complicações: condrólise e necrose avascular.</div>
+            <div class="mod-footer"><span class="mod-tag">Em breve</span></div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ============================================================
+           JOELHO
+      ============================================================ -->
+      <section class="specialty-section" id="joelho">
+        <div class="section-header">
+          <h2 class="section-title">🦵 Joelho</h2>
+          <span class="section-count">Ligamentos · Menisco · Cartilagem</span>
+        </div>
+        <div class="section-divider"></div>
+
+        <div class="module-grid">
+
+          <div class="mod-card steel locked" data-cat="joelho">
+            <div class="mod-top"><span class="mod-icon">🔗</span>
+              <div class="mod-badges"><span class="badge badge-teot">TEOT</span></div>
+            </div>
+            <div class="mod-number">EM PRODUÇÃO</div>
+            <div class="mod-title">LCA — Ruptura e Reconstrução</div>
+            <div class="mod-desc">Mecanismo, testes de Lachman e pivot-shift, reconstrução com tendão patelar vs. semitendíneo, reabilitação.</div>
+            <div class="mod-footer"><span class="mod-tag">Em breve</span></div>
+          </div>
+
+          <div class="mod-card steel locked" data-cat="joelho">
+            <div class="mod-top"><span class="mod-icon">🩹</span>
+              <div class="mod-badges"><span class="badge badge-teot">TEOT</span></div>
+            </div>
+            <div class="mod-number">EM PRODUÇÃO</div>
+            <div class="mod-title">Menisco no Adulto</div>
+            <div class="mod-desc">Lesões degenerativas vs. traumáticas, zonas vasculares, meniscectomia parcial vs. sutura, critérios de elegibilidade.</div>
+            <div class="mod-footer"><span class="mod-tag">Em breve</span></div>
+          </div>
+
+          <div class="mod-card steel locked" data-cat="joelho">
+            <div class="mod-top"><span class="mod-icon">🔄</span>
+              <div class="mod-badges"><span class="badge badge-teot">TEOT</span></div>
+            </div>
+            <div class="mod-number">EM PRODUÇÃO</div>
+            <div class="mod-title">Artroplastia Total do Joelho</div>
+            <div class="mod-desc">Indicações, técnica, alinhamento, complicações precoces e tardias, revisão. Diferenças CR vs. PS.</div>
+            <div class="mod-footer"><span class="mod-tag">Em breve</span></div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ============================================================
+           TRAUMA
+      ============================================================ -->
+      <section class="specialty-section" id="trauma">
+        <div class="section-header">
+          <h2 class="section-title">🚨 Trauma Ortopédico</h2>
+          <span class="section-count">Fraturas · Luxações · Politrauma</span>
+        </div>
+        <div class="section-divider"></div>
+
+        <div class="module-grid">
+
+          <div class="mod-card red locked" data-cat="trauma">
+            <div class="mod-top"><span class="mod-icon">💥</span>
+              <div class="mod-badges"><span class="badge badge-trauma">TRAUMA</span></div>
+            </div>
+            <div class="mod-number">EM PRODUÇÃO</div>
+            <div class="mod-title">Fratura do Colo Femoral</div>
+            <div class="mod-desc">Garden I–IV, tratamento cirúrgico: fixação vs. artroplastia, risco de necrose avascular, reabilitação precoce.</div>
+            <div class="mod-footer"><span class="mod-tag">Em breve</span></div>
+          </div>
+
+          <div class="mod-card red locked" data-cat="trauma">
+            <div class="mod-top"><span class="mod-icon">🦴</span>
+              <div class="mod-badges"><span class="badge badge-trauma">TRAUMA</span></div>
+            </div>
+            <div class="mod-number">EM PRODUÇÃO</div>
+            <div class="mod-title">Fratura do Tornozelo</div>
+            <div class="mod-desc">Classificação de Lauge-Hansen e Weber, estabilidade da sindesmose, indicação cirúrgica, fixação interna.</div>
+            <div class="mod-footer"><span class="mod-tag">Em breve</span></div>
+          </div>
+
+          <div class="mod-card red locked" data-cat="trauma ombro">
+            <div class="mod-top"><span class="mod-icon">💪</span>
+              <div class="mod-badges"><span class="badge badge-trauma">TRAUMA</span></div>
+            </div>
+            <div class="mod-number">EM PRODUÇÃO</div>
+            <div class="mod-title">Luxação Glenoumeral</div>
+            <div class="mod-desc">Anterior vs. posterior, manobras de redução, lesão de Bankart e Hill-Sachs, instabilidade recorrente.</div>
+            <div class="mod-footer"><span class="mod-tag">Em breve</span></div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ============================================================
+           COLUNA
+      ============================================================ -->
+      <section class="specialty-section" id="coluna">
+        <div class="section-header">
+          <h2 class="section-title">🧱 Coluna Vertebral</h2>
+          <span class="section-count">Hérnias · Estenose · Deformidades</span>
+        </div>
+        <div class="section-divider"></div>
+
+        <div class="module-grid">
+
+          <div class="mod-card bone locked" data-cat="coluna">
+            <div class="mod-top"><span class="mod-icon">🧱</span>
+              <div class="mod-badges"><span class="badge badge-teot">TEOT</span></div>
+            </div>
+            <div class="mod-number">EM PRODUÇÃO</div>
+            <div class="mod-title">Hérnia de Disco Lombar</div>
+            <div class="mod-desc">L4-L5 vs. L5-S1, síndromes radiculares, tratamento conservador vs. cirúrgico, discectomia minimamente invasiva.</div>
+            <div class="mod-footer"><span class="mod-tag">Em breve</span></div>
+          </div>
+
+          <div class="mod-card bone locked" data-cat="coluna pediatrica">
+            <div class="mod-top"><span class="mod-icon">🌀</span>
+              <div class="mod-badges">
+                <span class="badge badge-teot">TEOT</span>
+                <span class="badge badge-ped">PEDIÁTRICA</span>
+              </div>
+            </div>
+            <div class="mod-number">EM PRODUÇÃO</div>
+            <div class="mod-title">Escoliose Idiopática do Adolescente</div>
+            <div class="mod-desc">Ângulo de Cobb, classificação de Lenke, colete de Milwaukee, indicação cirúrgica, artrodese posterior.</div>
+            <div class="mod-footer"><span class="mod-tag">Em breve</span></div>
+          </div>
+
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-logo">Atlas Ortopédico Interativo</div>
+      <div class="footer-sig">Dra. Danielle Cruz</div>
+      <div class="footer-role">Ortopedista · Revisão TEOT · Material Educacional Gratuito</div>
+      <p class="footer-phrase">
+        "Cada osso conta uma história. Cada caso ensinado hoje é uma cirurgia melhor amanhã."
+      </p>
+      <div class="footer-links">
+        <a href="index.html" class="footer-link">Início</a>
+        <a href="lesoes-meniscais-pediatricas.html" class="footer-link">Menisco Pediátrico</a>
+      </div>
+      <p class="footer-copy">© 2026 Dra. Danielle Cruz · Conteúdo educacional gratuito · Todos os direitos reservados</p>
+    </div>
+  </footer>
+
+  <button class="scroll-top" id="scrollTop" aria-label="Voltar ao topo">↑</button>
+
+</div>
+
+<script>
+// Search
+const searchInput = document.getElementById('searchInput');
+const allCards    = document.querySelectorAll('.mod-card');
+
+searchInput.addEventListener('input', function() {
+  const q = this.value.toLowerCase().trim();
+  allCards.forEach(card => {
+    const text = card.textContent.toLowerCase();
+    card.classList.toggle('hidden', q.length > 0 && !text.includes(q));
+  });
+});
+
+// Category filter
+const filterBtns = document.querySelectorAll('.filter-btn');
+filterBtns.forEach(btn => {
+  btn.addEventListener('click', function() {
+    filterBtns.forEach(b => b.classList.remove('active'));
+    this.classList.add('active');
+    const cat = this.dataset.cat;
+    allCards.forEach(card => {
+      if (cat === 'todos') { card.classList.remove('hidden'); return; }
+      const cardCat = (card.dataset.cat || '').toLowerCase();
+      card.classList.toggle('hidden', !cardCat.includes(cat));
+    });
+    searchInput.value = '';
+  });
+});
+
+// Scroll top
+const scrollTopBtn = document.getElementById('scrollTop');
+window.addEventListener('scroll', () => {
+  scrollTopBtn.classList.toggle('visible', window.scrollY > 400);
+});
+scrollTopBtn.addEventListener('click', () => {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+</script>
+</body>
+</html>
