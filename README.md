@@ -23,7 +23,7 @@ o tema de lesões meniscais pediátricas com foco em:
 
 ## 👩‍⚕️ Autoria
 
-**Dra. Danniele Cruz**
+**Dra. Danielle Cruz**
 Ortopedista
 
 ---
